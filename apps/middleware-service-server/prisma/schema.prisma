@@ -1,0 +1,47 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Ota {
+  apiKey    String?
+  createdAt DateTime @default(now())
+  endpoint  String?
+  id        String   @id @default(cuid())
+  name      String?
+  updatedAt DateTime @updatedAt
+}
+
+model Integration {
+  createdAt   DateTime @default(now())
+  credentials Json?
+  id          String   @id @default(cuid())
+  name        String?
+  typeField   String?
+  updatedAt   DateTime @updatedAt
+}
+
+model Gds {
+  apiKey    String?
+  createdAt DateTime @default(now())
+  endpoint  String?
+  id        String   @id @default(cuid())
+  name      String?
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String?  @unique
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
