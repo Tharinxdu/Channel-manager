@@ -1,0 +1,51 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Promotion {
+  createdAt    DateTime  @default(now())
+  description  String?
+  discountRate Float?
+  endDate      DateTime?
+  id           String    @id @default(cuid())
+  name         String?
+  startDate    DateTime?
+  updatedAt    DateTime  @updatedAt
+}
+
+model RatePlan {
+  createdAt   DateTime @default(now())
+  description String?
+  id          String   @id @default(cuid())
+  name        String?
+  price       Float?
+  updatedAt   DateTime @updatedAt
+}
+
+model Discount {
+  createdAt      DateTime  @default(now())
+  description    String?
+  discountAmount Float?
+  endDate        DateTime?
+  id             String    @id @default(cuid())
+  name           String?
+  startDate      DateTime?
+  updatedAt      DateTime  @updatedAt
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String?  @unique
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
